@@ -1,6 +1,6 @@
 test_push
 
-code=red
+code=black
 
 more gitcode=yellow
 
