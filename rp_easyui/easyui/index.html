@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client Side Pagination in DataGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="./easyui-1.4.2/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./easyui-1.4.2/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="./demo.css">
+    <script type="text/javascript" src="./easyui-1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./easyui-1.4.2/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>Client Side Pagination in DataGrid</h2>
+    <p>This sample shows how to implement client side pagination in DataGrid.</p>
+    <div style="margin:20px 0;"></div>
+    
+    <table id="dg" title="Client Side Pagination" style="width:700px;height:300px" data-options="
+                rownumbers:true,
+                singleSelect:true,
+                autoRowHeight:false,
+                pagination:true,
+                pageSize:10">
+        <thead>
+            <tr>
+                <th field="inv" width="80">Inv No</th>
+                <th field="date" width="100">Date</th>
+                <th field="name" width="80">Name</th>
+                <th field="amount" width="80" align="right">Amount</th>
+                <th field="price" width="80" align="right">Price</th>
+                <th field="cost" width="100" align="right">Cost</th>
+                <th field="note" width="110">Note</th>
+            </tr>
+        </thead>
+    </table>
+    <form class="pagin">
+        手动翻页：<input id="hand" type="radio" name="pagin" value="0" checked="checked" onclick="pagination(flag)" style="margin-right: 40px;">
+        自动翻页：<input id="auto" type="radio" name="pagin" value="1"  onclick="autoPagination()">
+    </form>
+    <script>
+        function getData(){
+            var rows = [];
+            for(var i=1; i<=50; i++){
+                var amount = Math.floor(Math.random()*1000);
+                var price = Math.floor(Math.random()*1000);
+                rows.push({
+                    inv: 'Inv No '+i,
+                    date: $.fn.datebox.defaults.formatter(new Date()),
+                    name: 'Name '+i,
+                    amount: amount,
+                    price: price,
+                    cost: amount*price,
+                    note: 'Note '+i
+                });
+            }
+            return rows;
+        }
+        
+        function pagerFilter(data){
+            if (typeof data.length == 'number' && typeof data.splice == 'function'){    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');
+            // 分页信息展示
+            pager.pagination({
+                // 用户选择新的页面时触发
+                onSelectPage:function(pageNum, pageSize){
+                    // 新的页面pageNum，新的页面尺寸pageSize
+                    opts.pageNumber = pageNum;
+                    opts.pageSize = pageSize;
+                    // 改变选项，并刷新分页栏信息
+                    pager.pagination('refresh',{
+                        pageNumber:pageNum,
+                        pageSize:pageSize
+                    });
+                    // 加载本地数据，旧的行会被移除
+                    dg.datagrid('loadData',data);
+                }
+            });
+            // table数据分页展示
+            if (!data.originalRows){
+                data.originalRows = (data.rows);
+            }
+            var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+            var end = start + parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            return data;
+        }
+
+        function autoPagerFilter(data){
+            if (typeof data.length == 'number' && typeof data.splice == 'function'){    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');
+            opts.pageNumber=m;
+            if (!data.originalRows){
+                data.originalRows = (data.rows);
+            }
+            pager.pagination('refresh',{
+                    total:data.total,
+                    pageNumber:opts.pageNumber,
+                    pageSize:parseInt(opts.pageSize)
+                    });                
+            var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+            var end = (opts.pageNumber-1)*parseInt(opts.pageSize)+parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            m  = (end < data.total) ? parseInt(m+1) : 1; 
+            return data;               
+            
+        }
+        
+        
+        var flag;
+        var m=1;
+        // 初始化加载,手动翻页
+        $(function(){
+            pagination();
+            
+        });        
+        // window.onload=function(){
+        //     pagination();           
+        // }
+
+        // 非自动翻页
+        function pagination(){
+            clearInterval(flag);            
+            $('#dg').datagrid({loadFilter:pagerFilter}).datagrid('loadData', getData());
+        }
+        // 自动翻页
+        function autoPagination(){
+            var ifAuto=document.getElementById("auto").checked;
+            var isHand=document.getElementById("hand").checked;
+
+            flag=setInterval(function(){ 
+                $('#dg').datagrid({loadFilter:autoPagerFilter}).datagrid('loadData', getData());                         
+            },1000);
+        }
+
+    </script>
+</body>
+</html>

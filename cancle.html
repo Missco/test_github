@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+     const Hello = React.createClass({
+        getInitialState: function(){
+          return {
+            opacity : 1.0
+          };
+        },
+        
+        componentDidMount : function(){
+        //setInterval()的this指向全局对象，但使用时需要指向类的实例，因此需要用bind()绑定
+          this.timer = setInterval(function(){
+            var opacity = this.state.opacity;
+            opacity = opacity-0.05;
+            if(opacity <= 0.1){
+              opacity = 1.0;
+            }
+            this.setState({
+              opacity : opacity
+            });
+          }.bind(this),100);  
+        },
+
+        render : function(){
+          return (
+            <div style = {{opacity : this.state.opacity}}>
+              Hello {this.props.name}
+            </div>
+          );
+        }
+        
+      });
+
+     ReactDOM.render(
+        <Hello name = "World"/>,
+        document.body
+     )
+
+    </script>
+  </body>
+</html>

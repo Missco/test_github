@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大屏新版页面</title>
+    <link rel="stylesheet" href="./rp_bigScreen_new_v1.0.css">
+    <link rel="stylesheet" href="./rp_bigScreen_new_v1.0.js">
+</head>
+<body>
+    <section id="left_container">
+        <h1 id="header_title">
+            <span id="rp_title">社渠报表大屏展示</span>
+            <span id="rp_time">2017-10-30 星期一 09 : 20 : 35</span>
+            <img src="img/bigtitle1920.png">
+        </h1>        
+        <div id="summary">
+            <ul class="summary_num">
+                <li class="summary_detail" id="summary_detail_01">
+                    <span class="sum_num">1612</span>
+                    <span class="sum_ratio">月环比 1%</span>
+                </li>
+                <li class="summary_name">订单量</li>
+            </ul>
+            <ul class="summary_num">
+                <li class="summary_detail" id="summary_detail_02">
+                    <span class="sum_num">922</span>
+                    <span class="sum_ratio">月环比 11%</span>
+                    <span class="sum_ratio">成功率 57%</span>
+                    <!-- <img src="img/headtext1920.png" alt=""> -->
+                </li>
+                <li class="summary_name">写卡量</li>
+            </ul>
+            <ul class="summary_num">
+                <li class="summary_detail" id="summary_detail_03">
+                    <span class="sum_num">155</span>
+                    <span class="sum_ratio">月环比 26%</span>
+                    <!-- <img src="img/headtext1920.png" alt=""> -->
+                </li>
+                <li class="summary_name">当月产能网点</li>
+            </ul>
+        </div>
+        <div id="left_canves_one" class="map_canves">
+            <div class="canves_title">地市累计订单量</div>
+            <img src="img/charttitle1920.png" alt="">
+            <ul class="tab">
+                <li class="tab_one">当年</li>
+                <li class="tab_two">当月</li>
+                <li class="tab_three">当日</li>
+            </ul>
+            <div class="canves_chart" id="canves_chart_one">
+                <!-- <img src="img/gd_map1920.png"> -->
+            </div>
+        </div>
+    </section>
+    <section id="right_container">
+        <div class="normal_canves" id="right_canves_one">
+            <div class="canves_title">总量当月和上月对比</div>
+            <img src="img/charttitle1920.png" alt="">
+            <ul class="tab">
+                <li class="tab_one">写卡量</li>
+                <li class="tab_one">产能网点</li>
+                <li class="tab_one">店均产能网点</li>
+            </ul>
+            <div class="banner">
+                <ul>
+                    <li>
+                        <div class="canves_chart" id="canves_chart_two"></div>
+                    </li>
+                    <li>
+                        <div class="canves_chart" id="canves_chart_two"></div>
+                    </li>
+                    <li>
+                        <div class="canves_chart" id="canves_chart_two"></div>
+                    </li>
+                </ul>
+            </div>
+            <img src="img/left1920.png" alt="" class="banner-arrow prev">
+            <img src="img/right1920.png" alt="" class="banner-arrow next">
+        </div>
+        <div class="normal_canves" id="right_canves_two">
+            <div class="canves_title">各地市当月和上月对比</div>
+            <img src="img/charttitle1920.png" alt="" >
+            <ul class="tab">
+                <li class="tab_one">写卡量</li>
+                <li class="tab_one">产能网点</li>
+                <li class="tab_one">店均产能网点</li>
+            </ul>
+            <img src="img/left1920.png" alt="" class="trans_left">
+            <img src="img/right1920.png" alt="" class="trans_right">
+            <div class="canves_chart" id="canves_chart_three">
+                <img src="img/line-chart1920.png" alt=""  width="100%">
+            </div>
+        </div>
+    </section>
+
+<!-- ECharts单文件引入 -->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="./rp_bgScreen_new_v1.0.js"></script>
+<!-- <script src="./unslider.js"></script> -->
+<script src="//unslider.com/unslider.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var unslider = $('.banner').unslider({
+            dots: true
+        });
+        // 前一张和后一张的事件绑定
+        $('.normal_canves .banner-arrow').click(function(){
+            var forward = this.hasClass('prev') ? 'prev' : 'next';
+            unslider.data('unslider')[forward]();
+        });  
+    });
+    
+</script>
+
+</body>
+
+</html>

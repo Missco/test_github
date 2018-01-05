@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM事件</title>
+</head>
+<body>
+    <style type="text/css">
+         #ev{
+            height: 100px;
+            width: 100px;
+            background: #ccc;
+            color: red;
+         }   
+    </style>
+    <div id="ev">
+        hahaha
+    </div>
+    <script type="text/javascript">      
+// 点击div，查看事件捕获顺序
+        document.addEventListener('click',function(e){
+            console.log("document capture");
+            },true);
+
+        document.documentElement.addEventListener('click',function(e){
+            console.log("html capture");
+            },true);
+
+        document.body.addEventListener('click',function(e){
+            console.log("body capture");
+        }, true);
+
+        var ev=document.getElementById("ev");
+        ev.addEventListener('click',function(e){
+            console.log("ev capture");
+            },true);
+
+         window.addEventListener('click',function(e){
+            console.log("widow capture");
+            },true);
+         
+// 自定义事件，采用event
+        var eve = new Event("customer");
+        ev.addEventListener('customer', function(){
+            console.log("test diapatch");
+        });
+        setTimeout(function(){
+            ev.dispatchEvent(eve);
+        },2000);
+
+// 自定义事件，采用customevent
+        var ev=document.getElementById("ev");
+        var evemer = new CustomEvent('CustomEvent', {
+            bubbles: 'true',
+            cancelable: 'true',
+            detail : {
+                a:'a',
+                b:'b'
+            }
+
+        });
+        ev.addEventListener('CustomEvent', function(e){
+            var obj = e.detail;
+            console.log(obj.a + "  " + obj.b);
+        },true);
+
+        setTimeout(function(){
+            ev.dispatchEvent(evemer);
+        },3000);
+        
+
+    </script>
+</body>
+</html>

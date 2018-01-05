@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function animals() {
+             var s = "";
+            for (var i = 0; i < arguments.length; i++) {
+                console.log(arguments[i]);
+                s += arguments[i] + ",";
+            }
+            return s;
+        }
+        animals('cat', 'dog', 'fish')//cat, dog, fish
+    </script>
+</body>
+</html>

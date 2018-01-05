@@ -1,0 +1,300 @@
+/*reset*/
+body,ul,ol,li,p,h1,h2,h3,h4,h5,h6,form,fieldset,table,tr,th,td,img,div,dl,dt,dd,input,span,embed{margin:0;padding:0;}
+html{font-size:62.5%;font-family:"Microsoft YaHei";}
+img{border:none;}
+input,select,textarea{outline:none;border:none;}
+textarea{resize:none;}
+a{text-decoration:none;}
+.leftArea{float:left;}
+.rightArea{float:right;}
+.clearfix:after{content:"";display:block;clear:both;}
+.clearfix{zoom:1;}
+
+/*body*/
+body{
+	padding-top: 90px;
+	/*overflow-y: hidden;*/
+}
+
+/*nav*/
+nav{
+	background: url(../images/banner_01.png) no-repeat left top;
+	background-size: 100% 90px;
+	position: relative;
+}
+#sysLogo_05{
+	position: absolute;
+	left: 30px;
+	top: 10px;
+	/*height:50px;*/
+}
+#sysName_05{
+	position: absolute;
+	left: 170px;
+	top: 20px;
+	/*height:50px;*/
+}
+#unionLogo_01{
+	position: absolute;
+	right: 8px;
+	top: 8px;
+}
+nav li{
+	list-style: none;
+	font-family:"Microsoft YaHei";
+}
+nav .navbar-nav{
+	margin-top: 30px;
+	margin-right: 160px;
+}
+.dropdown-toggle{
+	background:url(../images/header_102.svg) no-repeat center center;
+	/*border: 1px solid red;*/
+}
+.triangledown{
+	margin-left: 38px;
+	margin-right: -20px;
+
+}
+.dropdown-menu{
+	width: 345px;
+	margin: 10px auto;
+}
+.li-title-pic{
+	margin:0 7px 0 20px;
+}
+.dropdown-menu li{
+	width: 80%;
+	margin: 5px auto;
+}
+.dropdown-menu .li-title{
+	width: 310px;
+	height: 43px;
+	margin-top: 17px;
+	border-bottom: 1px dashed #ccc;
+	font-size: 17px;
+}
+.dropdown-menu .li-title img{
+	margin-left: 10px;
+	margin-top: -3px;
+}
+.li-con{
+	padding:4px 0 26px 0;
+}
+.li-con span{
+	display: inline-block;
+	margin: 5px 0px 5px 5px;
+	padding-right: 7px;
+	height:12px;
+}
+.li-con span a{
+	color: black;
+	font-size: 14px;
+	padding-right: 8px;
+	height: 14px;
+	line-height: 14px;
+	vertical-align: top;
+}
+
+/*left-sidebar*/
+.left-sidebar,
+.nav-list{
+	position: fixed;
+	/*这里设置fixed后，它的所有属性都是针对显示屏的，如top/width/height都是针对显示屏*/
+	top: 90px;
+	left: 0;
+}
+.left-sidebar{
+	width: 10%;/*虽然有栅格系统，但已失效*/
+	height: 100%;
+	background-color: #323232;
+	border-right: 1px solid #666;
+	font-family: "Microsoft YaHei";
+
+}
+.left-sidebar li{list-style: none;}
+.left-sidebar a{
+	text-decoration: none; /*为啥最开始写的这句话会不生效*/
+	font-family:"Microsoft YaHei";
+	color: #999;
+}
+.left-sidebar .nav-list{	
+	width:10%;
+}
+.left-sidebar li{
+	height: 40px;
+	line-height: 40px;
+	vertical-align: center;
+	border-bottom: 1px solid #666;
+	padding-left: 44px;
+}
+.left-sidebar li a:hover{
+	font-size: 16px;
+}
+.left-sidebar #nav-list .li-active{
+	background-color: #f5f5f5;
+	color: #f37022;
+}
+.left-sidebar li a{
+	display: inline-block;
+	height: 38px;
+	line-height: 38px;
+	font-family:"Microsoft YaHei";
+}
+.left-sidebar li#li-1{
+	background: url(../images/sideber_101.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-2{
+	background: url(../images/sideber_201.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-3{
+	background: url(../images/sideber_301.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-4{
+	background: url(../images/sideber_101.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-5{
+	background: url(../images/sideber_201.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-6{
+	background: url(../images/sideber_301.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-7{
+	background: url(../images/sideber_101.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-8{
+	background: url(../images/sideber_201.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar li#li-9{
+	background: url(../images/sideber_301.svg) left center no-repeat;
+	background-position: 12px;
+}
+.left-sidebar .footer{
+	/*margin-top: 400px;*/
+}
+.left-sidebar .footer .guard{
+	background: url(../images/user.svg) center top no-repeat;
+	height: 75px;
+	text-align: center;
+	padding-top: 50px;
+	color: #666;
+}
+.left-sidebar .footer .password{
+	background: url(../images/modifyPassword_101.svg) left center no-repeat;
+}
+.left-sidebar .footer .exit{
+	background: url(../images/exit_101.svg) left center no-repeat;
+	margin-top: 5px;
+}
+.left-sidebar .footer .password,
+.left-sidebar .footer .exit{	
+	background-position: 16px;
+	/*这一句是要放在引入背景图片后*/
+	height: 30px;
+	line-height: 30px;
+	background-color: #4c4c4c;
+	padding-left: 40px;
+	color: #fff;
+
+}
+
+/*main*/
+.main{
+	width: 75%;
+	padding-top: 40px;
+	margin-left: 9%;
+	overflow-y: scroll;
+	background-color: #f5f5f5;
+}
+
+/*定义滚动条宽高及背景，宽高分别对应横竖滚动条的尺寸*/
+.main::-webkit-scrollbar{
+    width: 12px;
+}
+/*定义滑块，内阴影及圆角*/
+.main::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+    background-color: #dfdfdf;
+}
+.main a{
+	text-decoration: none;
+	font-family:"Microsoft YaHei";
+}
+.main .common{	
+	padding-top: 10px;
+	margin-bottom: 40px;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+}
+.main .common .title{
+	height: 20px;
+	line-height: 20px;
+	font-size: 24px;
+	border-left: 6px solid #66c335;
+	padding-left: 10px;
+	margin-bottom: 10px;
+	font-family:"Microsoft YaHei";
+}
+.main .common .title .title-e{
+	font-size: 16px;
+}
+.main .common .content{
+	background-color: #fcfbfb;
+}
+.main .common .content .main-li{
+	list-style: none;
+}
+.main .common .content .li-title{
+	color: #64c333;
+	font-size: 20px;	
+}
+.main .common .content .detail-ul li{
+	list-style-type: disc;
+	font-size: 14px;
+	margin: 5px auto;
+}
+.main .common .content .detail-ul li a{
+	color: #333;
+}
+
+/*right-banner*/
+.right-banner{
+	padding-top: 40px;
+	padding-left: 20px;
+	width: 16%;
+}
+.right-banner a{
+	text-decoration: none;
+	color: #333;
+	font-family:"Microsoft YaHei";
+}
+.right-banner li{
+	list-style: none;
+}
+.right-banner .right-title{
+	background: url(../images/footprint.png) left center no-repeat;
+	padding-left: 25px;
+	padding-bottom: 40px;
+	height: 60px;
+	line-height: 60px;
+	font-size: 18px;
+	color: #f37022;
+	border-bottom: 2px dashed #ccc;
+	font-family:"Microsoft YaHei";
+}
+.right-banner .recent-scan li{
+	
+	height: 40px;
+	line-height: 40px;
+	font-size: 14px;
+	border-bottom: 2px dashed #ccc;
+}

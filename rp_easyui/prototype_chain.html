@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型链</title>
+</head>
+<body>
+    <script type="text/javascript">
+    // 方法一：字面量
+        var o1={name:'o1'};
+        var o11=new Object({name:'o11'});
+    // 方法二：通过构造函数
+        var M=function(name){this.name=name};
+        var o2=new M('o2'); 
+
+    // 方法三：Object.create
+        var p={name:'o3'};
+        var o3=Object.create(p);
+
+    // 创建一个方法say
+        M.prototype.say = function(){
+            // body... 
+            console.log("say hi");
+        };
+        // o22可以调用say这个方法
+        var o22= new M('o22'); 
+
+    // func为构造函数
+    var new2=function(func){
+        // 创建一个实例对象
+        var o=Object.create(func.prototype);
+        // 执行构造函数,call()用func替换o
+        var k=func.call(o);
+        // 判断func函数执行后的结果是不是对象类型
+        if(typeof k === 'object'){
+            return k;
+        }else{
+            return o;
+        }
+    }
+
+    </script>
+</body>
+</html>

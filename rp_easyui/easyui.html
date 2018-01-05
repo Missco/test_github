@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Client Side Pagination in DataGrid - jQuery EasyUI Demo</title>
+    <link rel="stylesheet" type="text/css" href="./easyui/easyui-1.4.2/themes/black/easyui.css">
+    <link rel="stylesheet" type="text/css" href="./easyui/easyui-1.4.2/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="./easyui/demo.css">
+    <script type="text/javascript" src="./easyui/easyui-1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./easyui/easyui-1.4.2/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <h2>Client Side Pagination in DataGrid</h2>
+    <p>This sample shows how to implement client side pagination in DataGrid.</p>
+    <div style="margin:20px 0;"></div>
+    
+    <table id="dg" title="Client Side Pagination" style="width:700px;height:300px" data-options="
+                rownumbers:true,
+                singleSelect:true,
+                autoRowHeight:true,
+                pagination:true,
+                pageSize:10">
+        <thead>
+            <tr>
+                <th field="inv" width="80">Inv No</th>
+                <th field="date" width="100">Date</th>
+                <th field="name" width="80">Name</th>
+                <th field="amount" width="80" align="right">Amount</th>
+                <th field="price" width="80" align="right">Price</th>
+                <th field="cost" width="100" align="right">Cost</th>
+                <th field="note" width="110">Note</th>
+            </tr>
+        </thead>
+    </table>
+    <div style="margin:10px 0;">
+        <!-- <span>是否自动翻页: </span> -->
+        <!-- <select class="autopage"> -->
+        <!-- <select class="autopage">
+            <option value="0" selected="selected">禁止自动翻页</option>
+            <option value="1">自动翻页</option>            
+        </select><br/> -->
+        <form>
+            禁止自动翻页：
+            <input type="radio" checked="checked" name="Pageing" value="0" onclick="handlePage()" style="margin-right: 30px;cursor: pointer;" />
+            自动翻页：
+            <input type="radio" name="Pageing" value="1" onclick="autoPage()" style="margin-right: 30px;cursor: pointer;"/>
+        </form>
+
+    </div>
+    <script>
+        function getData(){
+            var rows = [];
+            for(var i=1; i<=800; i++){
+                var amount = Math.floor(Math.random()*1000);
+                var price = Math.floor(Math.random()*1000);
+                rows.push({
+                    inv: 'Inv No '+i,
+                    date: $.fn.datebox.defaults.formatter(new Date()),
+                    name: 'Name '+i,
+                    amount: amount,
+                    price: price,
+                    cost: amount*price,
+                    note: 'Note '+i
+                });
+            }
+            return rows;
+        }
+        
+        function pagerFilter(data){
+            if (typeof data.length == 'number' && typeof data.splice == 'function'){    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');            
+            pager.pagination({
+                onSelectPage:function(pageNum, pageSize){
+                    opts.pageNumber = pageNum;
+                    opts.pageSize = pageSize;
+                    pager.pagination('refresh',{
+                        pageNumber:pageNum,
+                        pageSize:pageSize
+                    });
+                    dg.datagrid('loadData',data);
+                }
+            });
+           
+            if (!data.originalRows){
+                data.originalRows = (data.rows);
+            }
+            var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+            var end = start + parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            return data;
+        }
+
+
+        function autoPagerFilter(data){
+            if (typeof data.length == 'number' && typeof data.splice == 'function'){    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');
+            
+            // pager.pagination({
+            //     onSelectPage:function(pageNum, pageSize){
+            //         opts.pageNumber = pageNum;
+            //         opts.pageSize = pageSize;
+            //         pager.pagination('refresh',{
+            //             pageNumber:pageNum,
+            //             pageSize:pageSize
+            //         });
+            //         dg.datagrid('loadData',data);
+            //     }
+            // });
+            //自动翻页 start
+            
+            pager.pagination('select',{
+                    pageNumber:(opts.pageNumber+3),
+                    pageSize:(opts.pageSize+5)
+                });
+            dg.datagrid('loadData',data);
+            
+            //自动翻页 end
+
+
+            if (!data.originalRows){
+                data.originalRows = (data.rows);
+            }
+            var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+            var end = start + parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            return data;
+        }
+
+        
+        $(function(){
+            handlePage();         
+                    
+        });
+
+        function handlePage(){
+             $('#dg').datagrid({loadFilter:pagerFilter}).datagrid('loadData', getData()); 
+        }
+        function autoPage(){
+             $('#dg').datagrid({loadFilter:autoPagerFilter}).datagrid('loadData', getData()); 
+        }
+
+        
+    </script>
+</body>
+</html>

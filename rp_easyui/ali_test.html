@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阿里笔试敲门砖</title>
+</head>
+<body>
+    <div class="container">
+        <ul class='list'>
+            <li>第一行<span class="delete">x</span></li>
+            <li>第二行<span class="delete">x</span></li>
+            <li>第三行<span class="delete">x</span></li>
+            <li>第四行<span class="delete">x</span></li>
+        </ul>
+    </div>
+</body>
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    li{
+        list-style: none;
+    }
+
+
+    .container{
+        padding: 100px;
+    }
+    .container ul{
+        
+    }
+    .container ul li{
+        /*display: block;*/
+        width: 300px;
+        height: 30px;
+        border: 2px solid #999;
+        margin: 10px 0;
+        padding:10px;
+        position: relative;
+    }
+    .container ul li span {
+        position: absolute;
+        height: 30px;
+        width: 50px;
+        background: #222;
+        color: white;
+        right: 0;
+        text-align: center;
+        cursor: pointer;
+    }
+</style>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script type="text/babel">
+
+    class List{
+        constructor(sel){
+            // 查询所有的sel元素，即list所在的ul，并转换成数组
+            this.el=Array.from(document.querySelectorAll(sel));
+            let self=this;
+            // 对el进行遍历，click触发事件
+            this.el.forEach( item => {
+                item.addEventListener('click', function(e){
+                    // e.target指向子对象，也就是触发这个事件的对象
+                    if(e.target.className.indexOf('delete')>-1){
+                        // call()表示用self.removeItem()代替self()
+                        self.removeItem.call(self,e.target);
+                    }
+                });
+            });
+        }
+
+        removeItem(target){
+            let self=this;
+            let findParent=function(node){
+                let parent=node.parentNode;
+                let root=self.el.find(item=>item===parent);
+                if(root){
+                    root.removeChild(node);
+                }else{
+                    findParent(parent);
+                }
+            };
+            findParent(target);
+        }
+    }
+
+    // DOM结构渲染后再运行click事件
+    window.addEventListener('DOMContentLoaded', function(){
+        new List('.list');
+    })
+</script>
+
+</html>

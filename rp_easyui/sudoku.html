@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>九宫格</title>
+</head>
+<body>
+    <div class="container">
+        <ul class="sudoku">
+            <li class="sudoku-chil" id="chil-one">1</li>
+            <li class="sudoku-chil" id="chil-two">2</li>
+            <li class="sudoku-chil" id="chil-three">3</li>
+            <li class="sudoku-chil" id="chil-four">4</li>
+            <li class="sudoku-chil" id="chil-five">5</li>
+            <li class="sudoku-chil" id="chil-six">6</li>
+            <li class="sudoku-chil" id="chil-seven">7</li>
+            <li class="sudoku-chil" id="chil-eight">8</li>
+            <li class="sudoku-chil" id="chil-nine">9</li>
+        </ul>
+    </div>
+</body>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    li{
+        list-style: none;
+    }
+    .sudoku{
+        display: flex;  /*采用flex布局*/
+        width: 300px;
+        flex-wrap: wrap; /*多个元素换行*/
+        padding: 100px;
+
+    }
+    .sudoku .sudoku-chil{
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        border:2px solid #999;
+        box-sizing: border-box;       /*将边距算在box里面，所见即所得*/
+        margin: 0 -2px -2px 0;  /*负边距调整边框*/
+    }
+    .sudoku .sudoku-chil:hover{
+        border-color: red;
+        z-index: 2;  /*改变堆叠顺序，使边框全部展示出来  */
+    }
+      
+</style>
+
+<script type="text/javascript">
+   
+
+
+</script>
+
+</html>

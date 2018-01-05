@@ -1,0 +1,142 @@
+<%@ page language="java" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme() + "://"
+           + request.getServerName() + ":" + request.getServerPort()
+           + path + "/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" >
+  <title>请登录</title>  
+  <base href="<%=basePath %>" />
+  <link rel="stylesheet" type="text/css" href="resources/css/public_MA_.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="resources/css/enter.css"/> -->
+  <link rel="stylesheet" type="text/css" href="resources/css/select_forall.css"/>
+  <link rel="stylesheet" type="text/css" href="css/login.css" >
+  <script type="text/javascript" src="resources/jquery/jquery-1.8.0.min.js"></script>
+  <script type="text/javascript" src="resources/window/lhgdialog.min.js?skin=chrome"></script>
+  <script type="text/javascript">
+  // 输入时字体变大
+    var input=document.getElementsByTagName('input')[0];
+    input.onkeyup = function ()
+        {
+            this.style.fontSize = '21px';
+        }
+  // 页面初始化      
+    $(function(){
+        $("#operId").focus();
+    });
+
+  /**登录验证*/
+    function login() {
+      if($("#operId").val()==""){
+        $("#msg").html("请输入登录账号");
+        $("#operId").focus();
+        return;
+      }
+      if($("#operPwd").val()==""){
+        $("#msg").html("请输入密码");
+        $("#operPwd").focus();
+        return;
+      }
+      if($("#valCode").val()==""){
+        $("#msg").html("请输入验证码");
+        $("#valCode").focus();
+        return;
+      }
+      $("#msg").html("");//清空
+      // $("#sub").hide();
+      // $("#loadDiv").show();
+      //登录验证
+      $.ajax({
+        type: "POST",
+        url: "<%=basePath %>sysLogin/checkSysLogin.do",
+        data: $("#loginForm").serialize()+"&code="+$("#valCode").val(),
+        datatype: "json",
+        success: function(data){
+          if (data.flag) {//登录成功
+            window.location.href="<%=basePath%>sysMenu/getLoginMenus.do";
+            return;
+          } else if(data.state!=0){   
+            $("#msg").html(data.msg);
+            // $("#loadDiv").hide();
+            // $("#sub").show();
+            $.dialog({
+              title: "修改密码",
+              lock: true,
+              drag: false,
+              resize: false,
+                width: '350px',
+                height: '200px',
+                content: "url:operator/toShowPage.do?operType=pwdEdit"
+            });
+          } else {
+            $("#msg").html(data.msg);
+            // $("#loadDiv").hide();
+            // $("#sub").show();
+          }
+          //重置验证码
+          resetValcode();
+        }
+        });
+    }
+
+    /**回车事件*/
+    function enterEnvent(evt){
+      evt = (evt) ? evt : ((window.event) ? window.event : "");
+      keyCode = evt.keyCode ? evt.keyCode : (evt.which ? evt.which : evt.charCode);
+      if (keyCode == 13){
+        login();
+      }
+    }
+
+    /**重置验证码*/
+    function resetValcode(){
+      $("#valImg").attr("src", "ValidateCodeServlet?"+Math.random());
+      $("#valCode").val("");
+    }
+  </script>
+</head>
+  
+<body>
+  <!-- 头部 -->
+  <div class="header">
+    <img src="images/sysLogo_04.png" alt="systemLogo"  class="sysLogo_04">
+    <img src="images/sysName_03.png" alt="systemName" width="420px" class="sysName_03">
+    <img src="images/unicomLogo_03.png" alt="unicomLogo" width="124px" class="unicomLogo_03">
+  </div>
+
+  <!-- 主体 -->
+  <div class="main" id="main">
+    <div class="mainLogin">
+        <img src="images/loginMain_04.png" alt="loginMainpic" width="390px" class="loginMainpic">
+        <div class="login">
+          <div class="title">
+              用户登录
+          </div>
+          <form id="loginForm" name="loginForm">
+            <input id="operId" name="operId" type="text" name="username" placeholder="请输入账号" onkeydown="enterEnvent(event)">
+            <input id="operPwd" name="operPwd" type="password" name="password" placeholder="请输入密码" onkeydown="enterEnvent(event)">
+            <input id="valCode" name="valCode" type="text" name="security" placeholder="请输入验证码" class="security leftArea" onkeydown="enterEnvent(event)" cursor:pointer;>
+            <!-- <img src="images/security_03.png" class="leftArea" > -->
+            <img id="valImg" class="leftArea" src="<%=basePath%>ValidateCodeServlet"  onclick="resetValcode();" alt="点击更新验证码">
+            <span class="tips leftArea">
+              看不清,换一张          
+            </span>
+            <input type="submit" name="submit" value="登&nbsp录" class="submit" onclick="login()">
+            <span class="error_notice" id="msg">验证码输入，错误账号输入错误，密码输入错误</span>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- 底部 -->
+  <div class="footer">
+    <p>研发单位：广东联通信息化事业部</p>
+  </div>
+
+  
+</body>
+</html>

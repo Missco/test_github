@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>通信类</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 创建ajax【参考网址】https://segmentfault.com/a/1190000006669043
+      // 参考jsonp.js
+    </script>
+
+    <script src="http://www.abc.com/?data=name&callback=jsonp" charset="utf-8"></script>
+
+    <script type="text/javascript">
+      // jsonp({
+      //     data: {
+      //
+      //     },
+      // });
+    </script>
+    <script type="text/javascript">
+      /**
+       * 跨域通信的几种方法
+       */
+
+      // jsonp工作原理，参考jsonp.js
+
+
+      // 利用hash，场景是当前页面 A 通过iframe或frame嵌入了跨域的页面 B
+      // 在A中伪代码如下：
+      //src表示页面，‘data’表示此时为字符串格式
+      var B = document.getElementsByTagName('iframe');
+      B.src = B.src + '#' + 'data';
+      // 在B中的伪代码如下
+      //onhashchange用于监听当前页面的hash是否改变
+      //window.location.hash中可能包含&之类的信息，那就需要特殊处理
+      window.onhashchange = function () {
+          var data = window.location.hash;
+      };
+
+      // postMessage
+      // 窗口A(http:A.com)向跨域的窗口B(http:B.com)发送信息，给谁发送就选择哪个window
+      //Bwindow表明此时选择B的window对象，而不是有Bwindow这么一个表达，实际书写去掉B即可
+      //‘data’为要发送的数据部分，推荐使用字符串格式
+      //'http://B.com'表示接受方的源，可以改为*表示可以给任何窗口发送，但是不安全不推荐
+      Bwindow.postMessage('data', 'http://B.com');
+      // 在窗口B中监听message事件
+      //massage事件同click事件使用方法一样
+      //false表示不要冒泡
+      Awindow.addEventListener('message', function (event) {
+          console.log(event.origin);//http:A.com
+          console.log(event.source);//Awindow
+          console.log(event.data);//data!
+      }, false);
+
+      // Websocket【参考资料】http://www.ruanyifeng.com/blog/2017/05/websocket.html
+      //申明一个WebSocket对象,wss表示加密，ws表示非加密
+      var ws = new WebSocket('wss://echo.websocket.org');
+      //发送请求
+      ws.onopen = function (evt) {
+          console.log('Connection open ...');
+          ws.send('Hello WebSockets!');
+      };
+      //接受消息
+      ws.onmessage = function (evt) {
+          console.log('Received Message: ', evt.data);
+          ws.close();
+      };
+      //监听是否关闭
+      ws.onclose = function (evt) {
+          console.log('Connection closed.');
+      };
+
+      // CORS【参考资料】http://www.ruanyifeng.com/blog/2016/04/cors.html
+      // url（必选），options（可选）
+      //fetch，是一个api，用来实现CORS通信
+      //示例此处是同源通信，也就是说fetch可以用于同源通信
+      //如果要实现跨域，需要配置，请参考资料
+      fetch('/some/url/', {
+          method: 'get',
+      }).then(function (response) {
+
+      }).catch(function (err) {
+        // 出错了，等价于 then 的第二个参数，但这样更好用更直观
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>请登录</title>
+  <link href="css/login_v1.0.css" rel="stylesheet">
+  <style type="text/css">    
+  </style>
+
+</head>
+  
+<body>
+  <!-- 头部 -->
+  <div class="header">
+    <img src="images/sysLogo_04.png" alt="systemLogo"  class="sysLogo_04">
+    <img src="images/sysName_03.png" alt="systemName" width="420px" class="sysName_03">
+    <img src="images/unicomLogo_03.png" alt="unicomLogo" width="124px" class="unicomLogo_03">
+  </div>
+
+  <!-- 主体 -->
+  <div class="main" id="main">
+    <div class="mainLogin">
+        <img src="images/loginMain_03.png" alt="loginMainpic" width="390px" class="loginMainpic">
+        <div class="login">
+          <div class="title">
+              用户登录
+          </div>
+          <form>
+            <input type="text" name="username" placeholder="请输入账号">
+            <input type="password" name="password" placeholder="请输入密码">
+            <input type="text" name="security" placeholder="请输入验证码" class="security leftArea">
+            <img src="images/security_03.png" class="leftArea">
+            <span class="tips leftArea">
+              看不清,换一张          
+            </span>
+            <input type="submit" name="submit" value="登&nbsp录" class="submit">
+            <span class="error_notice" >验证码输入，错误账号输入错误，密码输入错误</span>
+          </form>
+        </div>
+    </div>
+  </div>
+  <!-- 底部 -->
+  <div class="footer">
+    <p>研发单位：广东联通信息化事业部</p>
+  </div>
+
+  <script type="text/javascript">
+    var input=document.getElementsByTagName('input')[0];
+    input.onkeyup = function ()
+        {
+            this.style.fontSize = '21px';
+        }
+  </script>
+</body>
+</html>

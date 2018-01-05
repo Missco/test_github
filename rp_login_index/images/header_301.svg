@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="30" height="30" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #f37022;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="artboard-1">
+    <path d="M4.998,18.749 L10.150,18.749 L10.150,24.979 L4.998,24.979 L4.998,18.749 L4.998,18.749 ZM12.433,6.020 L17.585,6.020 L17.585,25.000 L12.433,25.000 L12.433,6.020 L12.433,6.020 ZM19.868,12.416 L25.019,12.416 L25.019,24.979 L19.868,24.979 L19.868,12.416 L19.868,12.416 Z" class="cls-1"/>
+  </g>
+</svg>

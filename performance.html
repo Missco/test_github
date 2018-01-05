@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>性能优化</title>
+    <!-- <script src="./defer1.js" charset="utf-8" async></script>
+    <script src="./defer2.js" charset="utf-8" async></script> -->
+</head>
+<body>
+    <!-- <div class="">
+        test
+        <script type="text/javascript">
+            console.log("write");
+            document.write("<span>write</span>");
+        </script>
+       <script type="text/javascript">
+         // script标签在内联DOM里，同步执行 
+            for(var i=0; i<200000; i++){
+                if(i % 20000 === 0){
+                    console.log(i);
+                }
+            }
+        </script>
+
+    </div> -->
+
+    <script type="text/javascript">
+        //src为要上报的路径
+        (new Image()).src='http://baidu.com/tesjk?r=tksjk';
+    </script>
+</body>
+</html>

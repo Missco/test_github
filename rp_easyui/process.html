@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js运行机制</title>
+</head>
+<body>
+    <script type="text/javascript">
+    for(var i=0;i<4;i++){//for是同步任务
+        setTimeout(function(){//执行到setTimeout，定时器会记住这个时间，但并不执行，设置时间到了，定时器才会把函数放在异步队列中执行，而再设置时间中i++已经执行完毕，所以当setTimeout执行时，i=4，执行了4次
+            console.log(i);
+        },1000)
+    }
+    </script>
+</body>
+</html>
+

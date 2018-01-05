@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #666;
+        opacity: 0.5;
+      }
+
+      .cls-2, .cls-3 {
+        fill: #f5f5f5;
+      }
+
+      .cls-3 {
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <g id="artboard-1">
+    <circle cx="30" cy="30" r="21" class="cls-1"/>
+    <circle cx="30" cy="28.828" r="8.406" class="cls-2"/>
+    <path d="M29.742,34.200 C36.469,34.200 41.922,39.653 41.922,46.380 C41.922,47.299 36.049,51.000 29.322,51.000 C22.596,51.000 17.562,48.117 17.562,46.800 C17.562,40.073 23.016,34.200 29.742,34.200 Z" class="cls-3"/>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS盒模型</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <section id="sec">
+        <style media="screen">
+            #sec{
+                background: #f00;
+               /* overflow: hidden;*/  /*设置该属性后，sec元素高度由100px增加为110px*/
+            }
+            .child{
+                height: 100px;
+                margin-top: 10px;
+                background: yellow;
+            }
+        </style>
+        <article class="child">
+            
+        </article>
+    </section>
+    
+</body>
+</html>
